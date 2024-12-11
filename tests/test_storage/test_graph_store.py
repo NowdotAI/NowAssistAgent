@@ -2,19 +2,19 @@ from typing import Optional
 
 import pytest
 
-from motleycrew.common import GraphStoreType
-from motleycrew.storage import MotleyGraphNode
-from motleycrew.storage import MotleyKuzuGraphStore
+from NowDotAI.common import GraphStoreType
+from NowDotAI.storage import NowDotAIGraphNode
+from NowDotAI.storage import NowDotAIKuzuGraphStore
 from tests.test_storage import GraphStoreFixtures
 
 
-class Entity(MotleyGraphNode):
+class Entity(NowDotAIGraphNode):
     int_param: int
     optional_str_param: Optional[str] = None
     optional_list_str_param: Optional[list[str]] = None
 
 
-class TestMotleyGraphStore(GraphStoreFixtures):
+class TestNowDotAIGraphStore(GraphStoreFixtures):
     @pytest.mark.parametrize("graph_store", GraphStoreType.ALL, indirect=True)
     def test_insert_new_node(self, graph_store):
         entity = Entity(int_param=1)
@@ -45,7 +45,7 @@ class TestMotleyGraphStore(GraphStoreFixtures):
         entity = Entity(int_param=1)
         assert graph_store.check_node_exists(entity) is False
 
-        MotleyKuzuGraphStore._set_node_id(node=entity, node_id=2)
+        NowDotAIKuzuGraphStore._set_node_id(node=entity, node_id=2)
         assert graph_store.check_node_exists(entity) is False
 
         graph_store.ensure_node_table(Entity)

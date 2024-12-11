@@ -7,39 +7,39 @@ from dotenv import load_dotenv
 from langchain_community.tools import ShellTool
 from motleycache import logger
 
-from motleycrew.agents.langchain.tool_calling_react import ReActToolCallingMotleyAgent
-from motleycrew.common import configure_logging
-from motleycrew.tasks import SimpleTask
-from motleycrew.tools.code.aider_tool import AiderTool
+from NowDotAI.agents.langchain.tool_calling_react import ReActToolCallingNowDotAIAgent
+from NowDotAI.common import configure_logging
+from NowDotAI.tasks import SimpleTask
+from NowDotAI.tools.code.aider_tool import AiderTool
 
 logger.setLevel(logging.INFO)
 WORKING_DIR = Path(os.path.realpath("."))
 
 try:
-    from motleycrew import MotleyCrew
+    from NowDotAI import NowDotAICrew
 except ImportError:
     # if we are running this from source
-    motleycrew_location = os.path.realpath(WORKING_DIR / "..")
-    sys.path.append(motleycrew_location)
+    NowDotAI_location = os.path.realpath(WORKING_DIR / "..")
+    sys.path.append(NowDotAI_location)
 
 
 # run instruction
 # to run the example, you need to clone the repository for the example at the same level as your project
 # cd ../../
-# git clone https://github.com/ShoggothAI/motleycrew-code-generation-example.git
+# git clone https://github.com/ShoggothAI/NowDotAI-code-generation-example.git
 
 
 def main():
-    crew = MotleyCrew()
+    crew = NowDotAICrew()
 
-    git_repo_path = r"../../motleycrew-code-generation-example"  # cloned repository path
+    git_repo_path = r"../../NowDotAI-code-generation-example"  # cloned repository path
     tests_file = os.path.join(git_repo_path, "test_math_functions.py")
     target_files = [tests_file]
 
     aider_tool = AiderTool(fnames=target_files, git_dname=git_repo_path, auto_commits=False)
     shell_tool = ShellTool()
 
-    developer = ReActToolCallingMotleyAgent(
+    developer = ReActToolCallingNowDotAIAgent(
         prompt_prefix="You are a lead software engineer working in a big tech company.",
         verbose=True,
         tools=[aider_tool, shell_tool],

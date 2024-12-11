@@ -1,6 +1,6 @@
 import pytest
 
-from motleycrew.tasks.simple import SimpleTask, SimpleTaskUnit
+from NowDotAI.tasks.simple import SimpleTask, SimpleTaskUnit
 from tests.test_crew import CrewFixtures
 
 

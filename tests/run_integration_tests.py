@@ -19,8 +19,8 @@ from nbformat.v4.nbbase import new_code_cell
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, project_root)  # ensure the examples are importable
 
-from motleycrew.common import logger, configure_logging
-from motleycrew.common.exceptions import (
+from NowDotAI.common import logger, configure_logging
+from NowDotAI.common.exceptions import (
     IntegrationTestException,
     IpynbIntegrationTestResultNotFound,
 )
@@ -34,7 +34,7 @@ IPYNB_INTEGRATION_TESTS = {
     "math_via_python_code_with_a_single_agent_ipynb": "examples/Math via python code with a single agent.ipynb",
     "validating_agent_output_ipynb": "examples/Validating agent output.ipynb",
     "advanced_output_handling_ipynb": "examples/Advanced output handling.ipynb",
-    # "using_autogen_with_motleycrew_ipynb": "examples/Using AutoGen with motleycrew.ipynb"
+    # "using_autogen_with_NowDotAI_ipynb": "examples/Using AutoGen with NowDotAI.ipynb"
 }
 
 MINIMAL_INTEGRATION_TESTS = {}

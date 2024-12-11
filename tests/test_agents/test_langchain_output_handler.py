@@ -1,16 +1,16 @@
 import pytest
 from langchain_core.agents import AgentAction, AgentFinish
 
-from motleycrew.agents.langchain.tool_calling_react import ReActToolCallingMotleyAgent
-from motleycrew.common import AuxPrompts
-from motleycrew.common.exceptions import InvalidOutput
-from motleycrew.tools import DirectOutput, MotleyTool
+from NowDotAI.agents.langchain.tool_calling_react import ReActToolCallingNowDotAIAgent
+from NowDotAI.common import AuxPrompts
+from NowDotAI.common.exceptions import InvalidOutput
+from NowDotAI.tools import DirectOutput, NowDotAITool
 from tests.test_agents import MockTool
 
 invalid_output = "Add more information about AI applications in medicine."
 
 
-class ReportOutputHandler(MotleyTool):
+class ReportOutputHandler(NowDotAITool):
     def __init__(self):
         super().__init__(
             name="output_handler",
@@ -44,7 +44,7 @@ def fake_agent_take_next_step(
 
 @pytest.fixture
 def agent():
-    agent = ReActToolCallingMotleyAgent(
+    agent = ReActToolCallingNowDotAIAgent(
         tools=[MockTool(), ReportOutputHandler()],
         verbose=True,
         chat_history=True,

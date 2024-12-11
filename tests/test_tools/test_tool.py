@@ -7,7 +7,7 @@ try:
 except ImportError:
     CrewAiTool = None
 
-from motleycrew.tools import DirectOutput, MotleyTool
+from NowDotAI.tools import DirectOutput, NowDotAITool
 
 
 @pytest.fixture
@@ -68,18 +68,18 @@ def crewai_tool(mock_tool_args_schema):
 
 @pytest.fixture
 def motley_agent(langchain_tool):
-    from motleycrew.agents.langchain import ReActToolCallingMotleyAgent
+    from NowDotAI.agents.langchain import ReActToolCallingNowDotAIAgent
 
-    return ReActToolCallingMotleyAgent(
+    return ReActToolCallingNowDotAIAgent(
         name="mock_agent",
         description="mock_description",
         tools=[langchain_tool],
     )
 
 
-class TestMotleyTool:
+class TestNowDotAITool:
     def test_tool_return_direct(self, langchain_tool, mock_input):
-        motley_tool = MotleyTool.from_supported_tool(langchain_tool, return_direct=True)
+        motley_tool = NowDotAITool.from_supported_tool(langchain_tool, return_direct=True)
 
         with pytest.raises(DirectOutput) as e:
             motley_tool.invoke(mock_input)
@@ -87,14 +87,14 @@ class TestMotleyTool:
         assert e.value.output == mock_input.get("mock_input")
 
     def test_tool_reflect_exception(self, langchain_tool, mock_input):
-        motley_tool = MotleyTool.from_supported_tool(
+        motley_tool = NowDotAITool.from_supported_tool(
             langchain_tool, exceptions_to_reflect=[ValueError]
         )
         output = motley_tool.invoke({"mock_input": "raise"})
         assert output == "ValueError: test"
 
     def test_langchain_tool_conversion(self, langchain_tool, mock_input):
-        motley_tool = MotleyTool.from_supported_tool(langchain_tool)
+        motley_tool = NowDotAITool.from_supported_tool(langchain_tool)
         assert isinstance(motley_tool.tool, BaseTool)
 
         converted_langchain_tool = motley_tool.to_langchain_tool()
@@ -108,7 +108,7 @@ class TestMotleyTool:
         assert langchain_tool.invoke(mock_input) == converted_langchain_tool.invoke(mock_input)
 
     def test_llama_index_tool_conversion(self, llama_index_tool, mock_input):
-        motley_tool = MotleyTool.from_supported_tool(llama_index_tool)
+        motley_tool = NowDotAITool.from_supported_tool(llama_index_tool)
         assert isinstance(motley_tool.tool, BaseTool)
 
         converted_llama_index_tool = motley_tool.to_llama_index_tool()
@@ -123,20 +123,20 @@ class TestMotleyTool:
         assert llama_index_tool(mock_input) == converted_llama_index_tool(mock_input)
 
     def test_motley_tool_self_conversion(self, langchain_tool):
-        motley_tool = MotleyTool.from_langchain_tool(langchain_tool)
-        motley_tool_2 = MotleyTool.from_supported_tool(motley_tool)
+        motley_tool = NowDotAITool.from_langchain_tool(langchain_tool)
+        motley_tool_2 = NowDotAITool.from_supported_tool(motley_tool)
 
         assert motley_tool.name == motley_tool_2.name
 
     def test_motley_agent_conversion(self, motley_agent, mock_input):
-        motley_tool = MotleyTool.from_supported_tool(motley_agent)
+        motley_tool = NowDotAITool.from_supported_tool(motley_agent)
 
         assert isinstance(motley_tool.tool, BaseTool)
         assert motley_tool.name == motley_agent.name
         assert motley_tool.description == motley_agent.description
 
     def test_autogen_tool_conversion(self, langchain_tool, mock_input):
-        motley_tool = MotleyTool.from_supported_tool(langchain_tool)
+        motley_tool = NowDotAITool.from_supported_tool(langchain_tool)
         assert isinstance(motley_tool.tool, BaseTool)
 
         converted_autogen_tool = motley_tool.to_autogen_tool()
@@ -148,7 +148,7 @@ class TestMotleyTool:
         if crewai_tool is None:
             return
 
-        motley_tool = MotleyTool.from_supported_tool(crewai_tool)
+        motley_tool = NowDotAITool.from_supported_tool(crewai_tool)
         assert isinstance(motley_tool.tool, BaseTool)
 
         converted_crewai_tool = motley_tool.to_crewai_tool()

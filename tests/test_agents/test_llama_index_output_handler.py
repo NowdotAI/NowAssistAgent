@@ -15,16 +15,16 @@ except ImportError:
     AgentChatResponse = None
     TaskState = None
 
-from motleycrew.agents.llama_index import ReActLlamaIndexMotleyAgent
-from motleycrew.common import AuxPrompts
-from motleycrew.common.exceptions import InvalidOutput
-from motleycrew.tools import MotleyTool
+from NowDotAI.agents.llama_index import ReActLlamaIndexNowDotAIAgent
+from NowDotAI.common import AuxPrompts
+from NowDotAI.common.exceptions import InvalidOutput
+from NowDotAI.tools import NowDotAITool
 from tests.test_agents import MockTool
 
 invalid_output = "Add more information about AI applications in medicine."
 
 
-class ReportOutputHandler(MotleyTool):
+class ReportOutputHandler(NowDotAITool):
     def __init__(self):
         super().__init__(
             name="output_handler",
@@ -53,7 +53,7 @@ def fake_run_step(*args, **kwargs):
 @pytest.fixture
 def agent():
 
-    agent = ReActLlamaIndexMotleyAgent(
+    agent = ReActLlamaIndexNowDotAIAgent(
         description="Your goal is to uncover cutting-edge developments in AI and data science",
         tools=[MockTool(), ReportOutputHandler()],
         force_output_handler=True,
@@ -89,7 +89,7 @@ def task_data(agent):
     return task, task_step_output
 
 
-def find_output_handler(agent: ReActLlamaIndexMotleyAgent) -> StructuredTool:
+def find_output_handler(agent: ReActLlamaIndexNowDotAIAgent) -> StructuredTool:
     agent_worker = agent.agent.agent_worker
     output_handler = None
     for tool in agent_worker._get_tools(""):

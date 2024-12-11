@@ -3,14 +3,14 @@ import os
 import pytest
 from langchain_core.prompts.chat import ChatPromptTemplate
 
-from motleycrew.agents.crewai.crewai_agent import CrewAIMotleyAgent
-from motleycrew.agents.langchain.tool_calling_react import ReActToolCallingMotleyAgent
-from motleycrew.agents.llama_index.llama_index_react import ReActLlamaIndexMotleyAgent
-from motleycrew.common.exceptions import (
+from NowDotAI.agents.crewai.crewai_agent import CrewAINowDotAIAgent
+from NowDotAI.agents.langchain.tool_calling_react import ReActToolCallingNowDotAIAgent
+from NowDotAI.agents.llama_index.llama_index_react import ReActLlamaIndexNowDotAIAgent
+from NowDotAI.common.exceptions import (
     AgentNotMaterialized,
     CannotModifyMaterializedAgent,
 )
-from motleycrew.tools.code.python_repl import create_repl_tool
+from NowDotAI.tools.code.python_repl import create_repl_tool
 from tests.test_agents import MockTool
 
 os.environ["OPENAI_API_KEY"] = "YOUR OPENAI API KEY"
@@ -22,7 +22,7 @@ class TestAgents:
 
     @pytest.fixture(scope="class")
     def crewai_agent(self):
-        agent = CrewAIMotleyAgent(
+        agent = CrewAINowDotAIAgent(
             role="Senior Research Analyst",
             goal="Uncover cutting-edge developments in AI and data science",
             prompt_prefix="""You work at a leading tech think tank.
@@ -37,7 +37,7 @@ class TestAgents:
 
     @pytest.fixture(scope="class")
     def langchain_agent(self):
-        agent = ReActToolCallingMotleyAgent(
+        agent = ReActToolCallingNowDotAIAgent(
             name="AI writer agent",
             prompt_prefix="Generate AI-generated content",
             description="AI-generated content",
@@ -48,7 +48,7 @@ class TestAgents:
 
     @pytest.fixture(scope="class")
     def llama_index_agent(self):
-        agent = ReActLlamaIndexMotleyAgent(
+        agent = ReActLlamaIndexNowDotAIAgent(
             prompt_prefix="Uncover cutting-edge developments in AI and data science",
             description="AI researcher",
             tools=[MockTool()],

@@ -5,4 +5,4 @@ API
    :toctree: _autosummary
    :recursive:
 
-   motleycrew
+   NowDotAI

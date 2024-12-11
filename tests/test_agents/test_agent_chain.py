@@ -1,6 +1,6 @@
 import pytest
 
-from motleycrew.agents.parent import MotleyAgentParent
+from NowDotAI.agents.parent import NowDotAIAgentParent
 
 
 class AgentMock:
@@ -8,7 +8,7 @@ class AgentMock:
         return input_dict
 
 
-class MotleyAgentMock(MotleyAgentParent):
+class NowDotAIAgentMock(NowDotAIAgentParent):
 
     def invoke(self, *args, **kwargs):
         self.materialize()
@@ -21,8 +21,8 @@ def agent_factory(*args, **kwargs):
 
 @pytest.fixture
 def motley_agents():
-    agent1 = MotleyAgentMock("agent1 description", agent_factory=agent_factory)
-    agent2 = MotleyAgentMock("agent2 description", agent_factory=agent_factory)
+    agent1 = NowDotAIAgentMock("agent1 description", agent_factory=agent_factory)
+    agent2 = NowDotAIAgentMock("agent2 description", agent_factory=agent_factory)
     return [agent1, agent2]
 
 

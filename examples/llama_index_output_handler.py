@@ -2,20 +2,20 @@ from dotenv import load_dotenv
 from langchain_community.tools import DuckDuckGoSearchRun
 
 
-from motleycrew import MotleyCrew
-from motleycrew.agents.llama_index import ReActLlamaIndexMotleyAgent
-from motleycrew.common import configure_logging
-from motleycrew.tasks import SimpleTask
-from motleycrew.common.exceptions import InvalidOutput
-from motleycrew.common import AsyncBackend
-from motleycrew.tools import MotleyTool
+from NowDotAI import NowDotAICrew
+from NowDotAI.agents.llama_index import ReActLlamaIndexNowDotAIAgent
+from NowDotAI.common import configure_logging
+from NowDotAI.tasks import SimpleTask
+from NowDotAI.common.exceptions import InvalidOutput
+from NowDotAI.common import AsyncBackend
+from NowDotAI.tools import NowDotAITool
 
 
 def main():
     """Main function of running the example."""
     search_tool = DuckDuckGoSearchRun()
 
-    class OutputHandler(MotleyTool):
+    class OutputHandler(NowDotAITool):
         def run(self, output: str):
             if "medicine" not in output.lower():
                 raise InvalidOutput("Add more information about AI applications in medicine.")
@@ -27,7 +27,7 @@ def main():
     )
 
     # TODO: add LlamaIndex native tools
-    researcher = ReActLlamaIndexMotleyAgent(
+    researcher = ReActLlamaIndexNowDotAIAgent(
         prompt_prefix="Your goal is to uncover cutting-edge developments in AI and data science",
         tools=[search_tool, output_handler],
         force_output_handler=True,
@@ -35,7 +35,7 @@ def main():
         max_iterations=16,  # default is 10, we add more because the output handler may reject the output
     )
 
-    crew = MotleyCrew(async_backend=AsyncBackend.NONE)
+    crew = NowDotAICrew(async_backend=AsyncBackend.NONE)
 
     # Create tasks for your agents
     task = SimpleTask(

@@ -4,9 +4,9 @@ from dotenv import load_dotenv
 from langchain.schema import HumanMessage, SystemMessage
 from langchain_core.prompts.chat import ChatPromptTemplate
 
-from motleycrew import MotleyCrew, Task
-from motleycrew.agents.langchain.legacy_react import LegacyReActMotleyAgent
-from motleycrew.tools.llm_tool import LLMTool
+from NowDotAI import NowDotAICrew, Task
+from NowDotAI.agents.langchain.legacy_react import LegacyReActNowDotAIAgent
+from NowDotAI.tools.llm_tool import LLMTool
 from .blog_post_input import text
 
 load_dotenv()
@@ -101,13 +101,13 @@ seo_expert = LLMTool(
 )
 
 
-writer = LegacyReActMotleyAgent(
+writer = LegacyReActNowDotAIAgent(
     prompt="You are a professional freelance copywriter with 10 years of experience.",
     tools=[editor, illustrator, seo_expert],
 )
 
 # Create tasks for your agents
-crew = MotleyCrew()
+crew = NowDotAICrew()
 task1 = Task(
     crew=crew,
     name="Write a blog post from the provided information",

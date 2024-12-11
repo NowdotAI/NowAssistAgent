@@ -1,6 +1,6 @@
 import pytest
 
-from motleycrew.tasks import TaskUnit
+from NowDotAI.tasks import TaskUnit
 
 
 class TestTaskUnit:

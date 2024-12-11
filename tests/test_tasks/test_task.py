@@ -4,22 +4,22 @@ import pytest
 
 from langchain_core.runnables import Runnable
 
-from motleycrew import MotleyCrew
-from motleycrew.tools import MotleyTool
-from motleycrew.tasks import Task, TaskUnitType, TaskUnit
-from motleycrew.storage.graph_store_utils import init_graph_store
-from motleycrew.common.exceptions import TaskDependencyCycleError
+from NowDotAI import NowDotAICrew
+from NowDotAI.tools import NowDotAITool
+from NowDotAI.tasks import Task, TaskUnitType, TaskUnit
+from NowDotAI.storage.graph_store_utils import init_graph_store
+from NowDotAI.common.exceptions import TaskDependencyCycleError
 
 
 class TaskMock(Task):
     def get_next_unit(self) -> List[TaskUnitType]:
         pass
 
-    def get_worker(self, tools: Optional[List[MotleyTool]]) -> Runnable:
+    def get_worker(self, tools: Optional[List[NowDotAITool]]) -> Runnable:
         pass
 
 
-def create_dummy_task(crew: MotleyCrew, name: str):
+def create_dummy_task(crew: NowDotAICrew, name: str):
     return TaskMock(
         name=name,
         task_unit_class=TaskUnit,
@@ -35,7 +35,7 @@ def graph_store():
 
 @pytest.fixture
 def crew(graph_store):
-    return MotleyCrew(graph_store=graph_store)
+    return NowDotAICrew(graph_store=graph_store)
 
 
 @pytest.fixture

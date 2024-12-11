@@ -1,10 +1,10 @@
 import pytest
 from langchain_community.tools import DuckDuckGoSearchRun
 
-from motleycrew.agents.langchain.tool_calling_react import ReActToolCallingMotleyAgent
-from motleycrew.crew import MotleyCrew
-from motleycrew.storage.graph_store_utils import init_graph_store
-from motleycrew.tasks.simple import (
+from NowDotAI.agents.langchain.tool_calling_react import ReActToolCallingNowDotAIAgent
+from NowDotAI.crew import NowDotAICrew
+from NowDotAI.storage.graph_store_utils import init_graph_store
+from NowDotAI.tasks.simple import (
     SimpleTask,
     SimpleTaskUnit,
     compose_simple_task_prompt_with_dependencies,
@@ -19,12 +19,12 @@ def graph_store():
 
 @pytest.fixture
 def crew(graph_store):
-    return MotleyCrew(graph_store=graph_store)
+    return NowDotAICrew(graph_store=graph_store)
 
 
 @pytest.fixture
 def agent():
-    agent = ReActToolCallingMotleyAgent(
+    agent = ReActToolCallingNowDotAIAgent(
         name="AI writer agent",
         tools=[DuckDuckGoSearchRun()],
         verbose=True,

@@ -1,11 +1,11 @@
 Customer support chatbot with Ray Serve
 =======================================
 
-This example demonstrates how to build a customer support chatbot using MotleyCrew and Ray Serve.
+This example demonstrates how to build a customer support chatbot using NowDotAICrew and Ray Serve.
 The chatbot is designed to answer customer queries based on a database of past issues and their resolutions.
 
-The code for this example can be found `here <https://github.com/ShoggothAI/motleycrew/tree/main/motleycrew/applications/customer_support>`_.
-Also, see the `blog post <https://blog.motleycrew.ai/blog/building-a-customer-support-chatbot-using-motleycrew-and-ray>`_ about this app.
+The code for this example can be found `here <https://github.com/ShoggothAI/NowDotAI/tree/main/NowDotAI/applications/customer_support>`_.
+Also, see the `blog post <https://blog.NowDotAI.ai/blog/building-a-customer-support-chatbot-using-NowDotAI-and-ray>`_ about this app.
 
 Key Components
 --------------
@@ -62,12 +62,12 @@ To run this example:
 
 .. code-block:: bash
 
-    git clone https://github.com/ShoggothAI/motleycrew.git
-    cd motleycrew
+    git clone https://github.com/ShoggothAI/NowDotAI.git
+    cd NowDotAI
     pip install -r requirements.txt
 
-    python -m motleycrew.applications.customer_support.issue_tree  # populate the issue tree
+    python -m NowDotAI.applications.customer_support.issue_tree  # populate the issue tree
     ray start --head
-    python -m motleycrew.applications.customer_support.ray_serve_app
+    python -m NowDotAI.applications.customer_support.ray_serve_app
 
-This example showcases the flexibility of MotleyCrew for building agent-based applications, allowing you to choose your preferred agent framework, orchestration model, and deployment solution.
+This example showcases the flexibility of NowDotAICrew for building agent-based applications, allowing you to choose your preferred agent framework, orchestration model, and deployment solution.

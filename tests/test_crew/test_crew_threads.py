@@ -1,7 +1,7 @@
 import pytest
 
-from motleycrew.crew.crew_threads import TaskUnitThreadPool, TaskUnitThreadState
-from motleycrew.common import Defaults
+from NowDotAI.crew.crew_threads import TaskUnitThreadPool, TaskUnitThreadState
+from NowDotAI.common import Defaults
 from tests.test_crew import CrewFixtures
 
 

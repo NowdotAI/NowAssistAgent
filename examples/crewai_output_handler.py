@@ -4,10 +4,10 @@ import sys
 
 from dotenv import load_dotenv
 
-from motleycrew.agents.crewai import CrewAIMotleyAgent
-from motleycrew.common import configure_logging
-from motleycrew.tasks import SimpleTask
-from motleycrew.common.exceptions import InvalidOutput
+from NowDotAI.agents.crewai import CrewAINowDotAIAgent
+from NowDotAI.common import configure_logging
+from NowDotAI.tasks import SimpleTask
+from NowDotAI.common.exceptions import InvalidOutput
 
 from langchain_community.tools import DuckDuckGoSearchRun
 from langchain_core.tools import StructuredTool
@@ -15,15 +15,15 @@ from langchain_core.tools import StructuredTool
 WORKING_DIR = Path(os.path.realpath(".."))
 
 try:
-    from motleycrew import MotleyCrew
+    from NowDotAI import NowDotAICrew
 except ImportError:
     # if we are running this from source
-    motleycrew_location = os.path.realpath(WORKING_DIR / "..")
-    sys.path.append(motleycrew_location)
+    NowDotAI_location = os.path.realpath(WORKING_DIR / "..")
+    sys.path.append(NowDotAI_location)
 
 
 def main():
-    crew = MotleyCrew()
+    crew = NowDotAICrew()
 
     search_tool = DuckDuckGoSearchRun()
 
@@ -40,7 +40,7 @@ def main():
         func=check_output,
     )
 
-    researcher = CrewAIMotleyAgent(
+    researcher = CrewAINowDotAIAgent(
         role="Senior Research Analyst",
         goal="Uncover cutting-edge developments in AI and data science, doing web search if necessary",
         backstory="""You work at a leading tech think tank.

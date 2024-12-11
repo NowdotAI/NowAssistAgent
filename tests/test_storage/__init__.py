@@ -1,7 +1,7 @@
 import kuzu
 import pytest
 
-from motleycrew.storage import MotleyKuzuGraphStore
+from NowDotAI.storage import NowDotAIKuzuGraphStore
 
 
 class GraphStoreFixtures:
@@ -10,7 +10,7 @@ class GraphStoreFixtures:
         db_path = tmpdir / "test_db"
         db = kuzu.Database(str(db_path))
 
-        graph_store = MotleyKuzuGraphStore(db)
+        graph_store = NowDotAIKuzuGraphStore(db)
         return graph_store
 
     @pytest.fixture

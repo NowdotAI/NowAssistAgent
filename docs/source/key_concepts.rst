@@ -1,7 +1,7 @@
 Key Concepts and API
 ====================
 
-This is an overview of motleycrew's key concepts.
+This is an overview of NowDotAI's key concepts.
 
 If you want to see them in action, see our `research agent example <examples/research_agent.html>`_.
 
@@ -11,7 +11,7 @@ For a basic introduction, you can check out the `quickstart <quickstart.html>`_.
 Crew and knowledge graph
 ------------------------
 
-The crew (:class:`motleycrew.crew.crew.MotleyCrew`) is a central concept in motleycrew. It is the orchestrator that knows what tasks sould be done in which order,
+The crew (:class:`NowDotAI.crew.crew.NowDotAICrew`) is a central concept in NowDotAI. It is the orchestrator that knows what tasks sould be done in which order,
 and manages the execution of those tasks.
 
 The crew has an underlying knowledge graph, in which it stores all information relevant to the execution of the tasks.
@@ -27,11 +27,11 @@ on the tasks can also read and write any other context they want to share.
 
 .. code-block:: python
 
-    from motleycrew import MotleyCrew
+    from NowDotAI import NowDotAICrew
 
-    crew = MotleyCrew()
+    crew = NowDotAICrew()
     crew.graph_store
-    # MotleyKuzuGraphStore(path=/path/to/kuzu_db)
+    # NowDotAIKuzuGraphStore(path=/path/to/kuzu_db)
 
 
 If you want to persist the data or otherwise customize the graph store, you can pass a graph store instance to the crew.
@@ -39,31 +39,31 @@ If you want to persist the data or otherwise customize the graph store, you can 
 .. code-block:: python
 
     import kuzu
-    from motleycrew.storage import MotleyKuzuGraphStore
+    from NowDotAI.storage import NowDotAIKuzuGraphStore
 
     database = kuzu.Database(database_path="kuzu_db")
-    graph_store = MotleyKuzuGraphStore(database=database)
-    crew = MotleyCrew(graph_store=graph_store)
+    graph_store = NowDotAIKuzuGraphStore(database=database)
+    crew = NowDotAICrew(graph_store=graph_store)
 
 
 Tasks, task units, and workers
 ------------------------------
 
-In motleycrew, a **task** is a body of work that is carried out according to certain rules. The task provides the crew
+In NowDotAI, a **task** is a body of work that is carried out according to certain rules. The task provides the crew
 with a description of what needs to be done in the form of **task units**, and who must do it - that's called a
 **worker**. A worker can be an agent, a tool, or for that matter any Runnable (in the Langchain sense).
 
 The worker receives a task unit as an input, processes it, and returns a result.
 
 In a simple case, a task will have a single task unit, and becomes completed as soon as the unit is done.
-For such cases, motleycrew provides a `SimpleTask` class, which basically contains an agent and a prompt.
+For such cases, NowDotAI provides a `SimpleTask` class, which basically contains an agent and a prompt.
 Refer to the `blog with images <examples/blog_with_images.html>`_ example for a more elaborate illustration.
 
 .. code-block:: python
 
-    from motleycrew.tasks import SimpleTask
+    from NowDotAI.tasks import SimpleTask
 
-    crew = MotleyCrew()
+    crew = NowDotAICrew()
     agent = ...
     task = SimpleTask(crew=crew, agent=agent, name="example task", description="Do something")
 
@@ -127,7 +127,7 @@ to see how it all works together.
 Asynchronous execution
 ----------------------
 
-Motleycrew supports asynchronous execution of task units. In this mode, the crew does not wait for the
+NowDotAIcrew supports asynchronous execution of task units. In this mode, the crew does not wait for the
 completion of a task unit before searching for others. Instead, it searches and queues the task units
 in an infinite loop till the queue is empty and no tasks are returning units.
 
@@ -135,13 +135,13 @@ Note that the dispatching process is always synchronous, so a task's ``get_next_
 after the previous unit is marked as pending and added to the knowledge graph and the execution queue.
 So a task can generate new units based on what units have already been dispatched.
 
-Motleycrew implements this behavior with 2 backends: ``asyncio`` and ``threading``. Feel free to make a feature request
+NowDotAIcrew implements this behavior with 2 backends: ``asyncio`` and ``threading``. Feel free to make a feature request
 if your needs call for some other backend.
 
 .. code-block:: python
 
-    from motleycrew.common import AsyncBackend
-    crew = MotleyCrew(async_backend=AsyncBackend.ASYNCIO)  # or AsyncBackend.THREADING
+    from NowDotAI.common import AsyncBackend
+    crew = NowDotAICrew(async_backend=AsyncBackend.ASYNCIO)  # or AsyncBackend.THREADING
     crew.run()
 
 Also, you should specify if a task's units can be executed in parallel to each other, by providing

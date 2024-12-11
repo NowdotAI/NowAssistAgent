@@ -1,6 +1,6 @@
 import pytest
 
-from motleycrew.tools import MotleyTool
+from NowDotAI.tools import NowDotAITool
 
 
 class ToolMock:
@@ -13,8 +13,8 @@ class ToolMock:
 
 @pytest.fixture
 def tools():
-    tool1 = MotleyTool(ToolMock())
-    tool2 = MotleyTool(ToolMock())
+    tool1 = NowDotAITool(ToolMock())
+    tool2 = NowDotAITool(ToolMock())
     return [tool1, tool2]
 
 

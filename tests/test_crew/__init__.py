@@ -1,7 +1,7 @@
 import pytest
 
-from motleycrew.crew import MotleyCrew
-from motleycrew.tasks import SimpleTask
+from NowDotAI.crew import NowDotAICrew
+from NowDotAI.tasks import SimpleTask
 
 
 class AgentMock:
@@ -27,7 +27,7 @@ class CrewFixtures:
 
     @pytest.fixture(scope="class")
     def crew(self):
-        obj = MotleyCrew()
+        obj = NowDotAICrew()
         return obj
 
     @pytest.fixture

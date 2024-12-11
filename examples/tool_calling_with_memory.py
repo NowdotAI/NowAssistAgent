@@ -1,10 +1,10 @@
 from dotenv import load_dotenv
 from langchain_community.tools import DuckDuckGoSearchRun
 
-from motleycrew import MotleyCrew
-from motleycrew.agents.langchain.tool_calling_react import ReActToolCallingMotleyAgent
-from motleycrew.common import configure_logging
-from motleycrew.tasks import SimpleTask
+from NowDotAI import NowDotAICrew
+from NowDotAI.agents.langchain.tool_calling_react import ReActToolCallingNowDotAIAgent
+from NowDotAI.common import configure_logging
+from NowDotAI.tasks import SimpleTask
 
 
 def main():
@@ -12,7 +12,7 @@ def main():
 
     tools = [search_tool]
 
-    researcher = ReActToolCallingMotleyAgent(
+    researcher = ReActToolCallingNowDotAIAgent(
         tools=tools,
         verbose=True,
         chat_history=True,
@@ -25,7 +25,7 @@ def main():
 
     outputs = []
 
-    crew = MotleyCrew()
+    crew = NowDotAICrew()
     task = SimpleTask(
         crew=crew,
         name="produce comprehensive analysis report on AI advancements",

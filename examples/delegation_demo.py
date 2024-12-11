@@ -7,22 +7,22 @@ import kuzu
 from dotenv import load_dotenv
 from langchain_community.tools import DuckDuckGoSearchRun
 
-from motleycrew.agents.crewai import CrewAIMotleyAgent
-from motleycrew.agents.langchain import ReActToolCallingMotleyAgent
-from motleycrew.agents.llama_index import ReActLlamaIndexMotleyAgent
-from motleycrew.common import configure_logging
-from motleycrew.storage import MotleyKuzuGraphStore
-from motleycrew.tasks import SimpleTask
-from motleycrew.tools.image.dall_e import DallEImageGeneratorTool
+from NowDotAI.agents.crewai import CrewAINowDotAIAgent
+from NowDotAI.agents.langchain import ReActToolCallingNowDotAIAgent
+from NowDotAI.agents.llama_index import ReActLlamaIndexNowDotAIAgent
+from NowDotAI.common import configure_logging
+from NowDotAI.storage import NowDotAIKuzuGraphStore
+from NowDotAI.tasks import SimpleTask
+from NowDotAI.tools.image.dall_e import DallEImageGeneratorTool
 
 WORKING_DIR = Path(os.path.realpath("."))
 
 try:
-    from motleycrew import MotleyCrew
+    from NowDotAI import NowDotAICrew
 except ImportError:
     # if we are running this from source
-    motleycrew_location = os.path.realpath(WORKING_DIR / "..")
-    sys.path.append(motleycrew_location)
+    NowDotAI_location = os.path.realpath(WORKING_DIR / "..")
+    sys.path.append(NowDotAI_location)
 
 if __name__ == "__main__":
     if "Dropbox" in WORKING_DIR.parts and platform.system() == "Windows":
@@ -38,12 +38,12 @@ else:
 def main():
 
     db = kuzu.Database(DB_PATH)
-    graph_store = MotleyKuzuGraphStore(db)
-    crew = MotleyCrew(graph_store=graph_store)
+    graph_store = NowDotAIKuzuGraphStore(db)
+    crew = NowDotAICrew(graph_store=graph_store)
 
     search_tool = DuckDuckGoSearchRun()
 
-    researcher = CrewAIMotleyAgent(
+    researcher = CrewAINowDotAIAgent(
         role="Senior Research Analyst",
         goal="Uncover cutting-edge developments in AI and data science, doing web search if necessary",
         backstory="""You work at a leading tech think tank.
@@ -54,7 +54,7 @@ def main():
     )
 
     # You can give agents as tools to other agents
-    writer = ReActToolCallingMotleyAgent(
+    writer = ReActToolCallingNowDotAIAgent(
         name="AI writer agent",
         prompt_prefix="You are an experienced writer with a passion for technology.",
         description="Experienced writer with a passion for technology.",
@@ -63,7 +63,7 @@ def main():
     )
 
     # Illustrator
-    illustrator = ReActLlamaIndexMotleyAgent(
+    illustrator = ReActLlamaIndexNowDotAIAgent(
         name="Illustrator",
         prompt_prefix="Create beautiful and insightful illustrations for a blog post",
         tools=[DallEImageGeneratorTool(os.path.realpath("./images"))],

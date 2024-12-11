@@ -2,7 +2,7 @@ Choosing LLMs
 ====================
 
 Generally, the interaction with an LLM is up to the agent implementation.
-However, as motleycrew integrates with several agent frameworks, there is some common ground for how to choose LLMs.
+However, as NowDotAI integrates with several agent frameworks, there is some common ground for how to choose LLMs.
 
 
 Providing an LLM to an agent
@@ -12,11 +12,11 @@ In general, you can pass a specific LLM to the agent you're using.
 
 .. code-block:: python
 
-    from motleycrew.agents.langchain import ReActToolCallingMotleyAgent
+    from NowDotAI.agents.langchain import ReActToolCallingNowDotAIAgent
     from langchain_openai import ChatOpenAI
 
     llm = ChatOpenAI(model="gpt-4o", temperature=0)
-    agent = ReActToolCallingMotleyAgent(llm=llm, tools=[...])
+    agent = ReActToolCallingNowDotAIAgent(llm=llm, tools=[...])
 
 
 The LLM class depends on the agent framework you're using.
@@ -24,8 +24,8 @@ That's why we have an ``init_llm`` function to help you set up the LLM.
 
 .. code-block:: python
 
-    from motleycrew.common.llms import init_llm
-    from motleycrew.common import LLMFramework, LLMProvider
+    from NowDotAI.common.llms import init_llm
+    from NowDotAI.common import LLMFramework, LLMProvider
 
     llm = init_llm(
         llm_framework=LLMFramework.LANGCHAIN,
@@ -33,23 +33,23 @@ That's why we have an ``init_llm`` function to help you set up the LLM.
         llm_name="claude-3-5-sonnet-latest",
         llm_temperature=0
     )
-    agent = ReActToolCallingMotleyAgent(llm=llm, tools=[...])
+    agent = ReActToolCallingNowDotAIAgent(llm=llm, tools=[...])
 
 
-The currently supported frameworks (:py:class:`motleycrew.common.enums.LLMFramework`) are:
+The currently supported frameworks (:py:class:`NowDotAI.common.enums.LLMFramework`) are:
 
-- :py:class:`Langchain <motleycrew.common.enums.LLMFramework.LANGCHAIN>` for Langchain-based agents from Langchain, CrewAI, motelycrew etc.
-- :py:class:`LlamaIndex <motleycrew.common.enums.LLMFramework.LLAMA_INDEX>` for LlamaIndex-based agents.
+- :py:class:`Langchain <NowDotAI.common.enums.LLMFramework.LANGCHAIN>` for Langchain-based agents from Langchain, CrewAI, motelycrew etc.
+- :py:class:`LlamaIndex <NowDotAI.common.enums.LLMFramework.LLAMA_INDEX>` for LlamaIndex-based agents.
 
-The currently supported LLM providers (:py:class:`motleycrew.common.enums.LLMProvider`) are:
+The currently supported LLM providers (:py:class:`NowDotAI.common.enums.LLMProvider`) are:
 
-- :py:class:`OpenAI <motleycrew.common.enums.LLMProvider.OPENAI>`
-- :py:class:`Anthropic <motleycrew.common.enums.LLMProvider.ANTHROPIC>`
-- :py:class:`Groq <motleycrew.common.enums.LLMProvider.GROQ>`
-- :py:class:`Together <motleycrew.common.enums.LLMProvider.TOGETHER>`
-- :py:class:`Replicate <motleycrew.common.enums.LLMProvider.REPLICATE>`
-- :py:class:`Ollama <motleycrew.common.enums.LLMProvider.OLLAMA>`
-- :py:class:`Azure OpenAI <motleycrew.common.enums.LLMProvider.AZURE_OPENAI>`
+- :py:class:`OpenAI <NowDotAI.common.enums.LLMProvider.OPENAI>`
+- :py:class:`Anthropic <NowDotAI.common.enums.LLMProvider.ANTHROPIC>`
+- :py:class:`Groq <NowDotAI.common.enums.LLMProvider.GROQ>`
+- :py:class:`Together <NowDotAI.common.enums.LLMProvider.TOGETHER>`
+- :py:class:`Replicate <NowDotAI.common.enums.LLMProvider.REPLICATE>`
+- :py:class:`Ollama <NowDotAI.common.enums.LLMProvider.OLLAMA>`
+- :py:class:`Azure OpenAI <NowDotAI.common.enums.LLMProvider.AZURE_OPENAI>`
 
 Please raise an issue if you need to add support for another LLM provider.
 
@@ -64,7 +64,7 @@ You can control the default LLM as follows:
 
 .. code-block:: python
 
-    from motleycrew.common import Defaults
+    from NowDotAI.common import Defaults
     Defaults.DEFAULT_LLM_PROVIDE = "the_new_default_LLM_provider"
     Defaults.DEFAULT_LLM_NAME = "name_of_the_new_default_model_from_the_provider"
 
@@ -78,8 +78,8 @@ the `LLM_MAP` has an entry for the LLM provider, for example as follows:
 
 .. code-block:: python
 
-    from motleycrew.common import LLMProvider
-    from motleycrew.common.llms import LLM_MAP
+    from NowDotAI.common import LLMProvider
+    from NowDotAI.common.llms import LLM_MAP
 
     LLM_MAP[(LLMFramework.LANGCHAIN, "MyLLMProvider")] = my_langchain_llm_factory
     LLM_MAP[(LLMFramework.LLAMA_INDEX, "MyLLMProvider")] = my_llamaindex_llm_factory
@@ -105,5 +105,5 @@ You can also overwrite the `LLM_MAP` values for e.g. the OpenAI models if, for e
 you want to use an in-house wrapper for Langchain or Llamaindex model adapters
 (for example, to use an internal gateway instead of directly hitting the OpenAI endpoints).
 
-Note that at present, if you use Autogen with motleycrew, you will need to separately control
+Note that at present, if you use Autogen with NowDotAI, you will need to separately control
 the models that Autogen uses, using the Autogen-specific APIs.

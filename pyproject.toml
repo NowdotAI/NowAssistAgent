@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "motleycrew"
+name = "NowDotAI"
 version = "0.2.4"
 description = "A lightweight agent interaction framework."
-authors = ["MotleyCrew <github@motleycrew.ai>"]
+authors = ["NowDotAICrew <github@NowDotAI.ai>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
